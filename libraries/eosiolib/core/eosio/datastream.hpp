@@ -5,6 +5,7 @@
 #pragma once
 #include "check.hpp"
 #include "varint.hpp"
+#include "print.hpp"
 
 #include <list>
 #include <queue>

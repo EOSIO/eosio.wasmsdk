@@ -6,9 +6,15 @@
 #include <functional>
 #include <stdio.h>
 #include <setjmp.h>
+#include "intrinsics_impl.hpp"
 
 eosio::cdt::output_stream std_out;
 eosio::cdt::output_stream std_err;
+
+primary_index_store* primary_index;
+secondary_index_store* secondary_indexes;
+
+contract_state* global_state;
 
 extern "C" {
    int main(int, char**);
@@ -81,6 +87,11 @@ extern "C" {
       ___disable_output = false;
       ___has_failed = false;
       ___earlier_unit_test_has_failed = false;
+
+      primary_index = new primary_index_store;
+      secondary_indexes = new secondary_index_store;
+
+      global_state = new contract_state;
 
       // preset the print functions
       intrinsics::set_intrinsic<intrinsics::prints_l>([](const char* cs, uint32_t l) {

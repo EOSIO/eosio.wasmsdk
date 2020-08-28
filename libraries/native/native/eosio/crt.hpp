@@ -8,11 +8,19 @@ namespace eosio { namespace cdt {
       none
    };
    struct output_stream {
-      char output[1024*2];
+      static const int MAX_OUTPUT = 1024*2;
+      char output[MAX_OUTPUT];
       size_t index = 0;
       std::string to_string()const { return std::string((const char*)output, index); }
       const char* get()const { return output; }
-      void push(char c) { output[index++] = c; }
+      void push(char c) { 
+         if (index+1 < MAX_OUTPUT) {
+            output[index++] = c;
+         } else {
+            // TODO:
+            // What should we do here?
+         }
+      }
       void clear() { index = 0; }
    };
 }} //ns eosio::cdt

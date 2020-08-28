@@ -108,7 +108,7 @@ void db_remove_i64(int32_t iterator);
   *  @endcode
   */
 __attribute__((eosio_wasm_import))
-int32_t db_get_i64(int32_t iterator, const void* data, uint32_t len);
+int32_t db_get_i64(int32_t iterator, void* data, uint32_t len);
 
 /**
   *

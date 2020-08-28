@@ -33,7 +33,7 @@ namespace eosio {
       void db_remove_i64(int32_t);
 
       __attribute__((eosio_wasm_import))
-      int32_t db_get_i64(int32_t, const void*, uint32_t);
+      int32_t db_get_i64(int32_t, void*, uint32_t);
 
       __attribute__((eosio_wasm_import))
       int32_t db_next_i64(int32_t, uint64_t*);
@@ -761,11 +761,13 @@ class multi_index
       const item& load_object_by_primary_iterator( int32_t itr )const {
          using namespace _multi_index_detail;
 
+#if 0
          auto itr2 = std::find_if(_items_vector.rbegin(), _items_vector.rend(), [&](const item_ptr& ptr) {
             return ptr._primary_itr == itr;
          });
          if( itr2 != _items_vector.rend() )
             return *itr2->_item;
+#endif
 
          auto size = internal_use_do_not_use::db_get_i64( itr, nullptr, 0 );
          eosio::check( size >= 0, "error reading iterator" );
@@ -924,10 +926,12 @@ class multi_index
 
             uint64_t next_pk;
             auto next_itr = internal_use_do_not_use::db_next_i64( _item->__primary_itr, &next_pk );
-            if( next_itr < 0 )
+            if( next_itr < 0 ) {
                _item = nullptr;
-            else
+            }
+            else {
                _item = &_multidx->load_object_by_primary_iterator( next_itr );
+            }
             return *this;
          }
          const_iterator& operator--() {
@@ -1540,7 +1544,6 @@ class multi_index
             ds << obj;
 
             auto pk = obj.primary_key();
-
             i.__primary_itr = internal_use_do_not_use::db_store_i64( _scope, static_cast<uint64_t>(TableName), payer.value, pk, buffer, size );
 
             if ( max_stack_buffer_size < size ) {
@@ -1765,12 +1768,17 @@ class multi_index
        *  @endcode
        */
       const_iterator find( uint64_t primary )const {
+#if 0
+         eosio::print_f("\t\tfind primary\n");
          auto itr2 = std::find_if(_items_vector.rbegin(), _items_vector.rend(), [&](const item_ptr& ptr) {
             return ptr._item->primary_key() == primary;
          });
+         eosio::print_f("\t\tfind primary 2\n");
          if( itr2 != _items_vector.rend() )
             return iterator_to(*(itr2->_item));
 
+         eosio::print_f("\t\tfind primary 3\n");
+#endif
          auto itr = internal_use_do_not_use::db_find_i64( _code.value, _scope, static_cast<uint64_t>(TableName), primary );
          if( itr < 0 ) return end();
 
@@ -1841,6 +1849,7 @@ class multi_index
          eosio::check( itr != end(), "cannot pass end iterator to erase" );
 
          const auto& obj = *itr;
+
          ++itr;
 
          erase(obj);
@@ -1888,11 +1897,13 @@ class multi_index
          eosio::check( _code == current_receiver(), "cannot erase objects in table of another contract" ); // Quick fix for mutating db using multi_index that shouldn't allow mutation. Real fix can come in RC2.
 
          auto pk = objitem.primary_key();
+#if 0
          auto itr2 = std::find_if(_items_vector.rbegin(), _items_vector.rend(), [&](const item_ptr& ptr) {
             return ptr._item->primary_key() == pk;
          });
 
          eosio::check( itr2 != _items_vector.rend(), "attempt to remove object that was not in multi_index" );
+#endif
 
          internal_use_do_not_use::db_remove_i64( objitem.__primary_itr );
 
@@ -1908,7 +1919,9 @@ class multi_index
                secondary_index_db_functions<typename index_type::secondary_key_type>::db_idx_remove( i );
          });
 
+#if 0
          _items_vector.erase(--(itr2.base()));
+#endif
       }
 
 };

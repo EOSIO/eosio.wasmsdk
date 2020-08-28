@@ -8,8 +8,6 @@
 #include <string_view>
 #include <tuple>
 
-#include <eosio/print.hpp>
-
 namespace bluegrass { namespace meta {
    template <typename T>
    constexpr inline std::string_view type_name() {
