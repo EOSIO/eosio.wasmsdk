@@ -96,13 +96,13 @@ eosio-readelf
 
 ## Contributing
 
-[Contributing Guide](../CONTRIBUTING.md)
+[Contributing Guide](./CONTRIBUTING.md)
 
-[Code of Conduct](../CONTRIBUTING.md#conduct)
+[Code of Conduct](./CONTRIBUTING.md#conduct)
 
 ## License
 
-[MIT](../LICENSE)
+[MIT](./LICENSE)
 
 ## Important
 
