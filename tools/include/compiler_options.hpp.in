@@ -802,7 +802,7 @@ static Options CreateOptions(bool add_defaults=true) {
       }
       ldopts.emplace_back("-stack-size=" + std::to_string(stack_size_opt));
       if (fno_lto_opt) {
-         ldopts.emplace_back("-fno-lto-opt");
+         ldopts.emplace_back("-fno-lto");
       }
       else if (!lto_opt_opt.empty()) {
          ldopts.emplace_back("-lto-opt="+lto_opt_opt);
