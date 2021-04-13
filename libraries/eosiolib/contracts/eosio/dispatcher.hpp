@@ -178,6 +178,7 @@ extern "C" { \
    [[eosio::wasm_entry]] \
    void apply( uint64_t receiver, uint64_t code, uint64_t action ) { \
       if( code == receiver ) { \
+         bool executed = false; \
          switch( action ) { \
             EOSIO_DISPATCH_HELPER( TYPE, MEMBERS ) \
          } \
