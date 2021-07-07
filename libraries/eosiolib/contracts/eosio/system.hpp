@@ -19,7 +19,7 @@ namespace eosio {
       };
 
       __attribute__((eosio_wasm_import))
-      bool is_feature_activated( const capi_checksum256* feature_digest );
+      bool is_feature_activated( const struct capi_checksum256* feature_digest);
 
       __attribute__((eosio_wasm_import))
       uint64_t get_sender();

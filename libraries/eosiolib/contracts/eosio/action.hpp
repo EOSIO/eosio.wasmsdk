@@ -42,10 +42,10 @@ namespace eosio {
          bool is_account( uint64_t name );
 
          __attribute__((eosio_wasm_import))
-         void send_inline(char *serialized_action, size_t size);
+         void send_inline(char* serialized_action, size_t size);
 
          __attribute__((eosio_wasm_import))
-         void send_context_free_inline(char *serialized_action, size_t size);
+         void send_context_free_inline(char* serialized_action, size_t size);
 
          __attribute__((eosio_wasm_import))
          uint64_t  publication_time();

@@ -34,10 +34,10 @@ namespace eosio {
          int64_t set_proposed_producers( char*, uint32_t );
 
          __attribute__((eosio_wasm_import))
-         void preactivate_feature( const capi_checksum256* feature_digest );
+         void preactivate_feature( const struct capi_checksum256* feature_digest );
 
          __attribute__((eosio_wasm_import))
-         int64_t set_proposed_producers_ex( uint64_t producer_data_format, char *producer_data, uint32_t producer_data_size );
+         int64_t set_proposed_producers_ex( uint64_t producer_data_format, char* producer_data, uint32_t producer_data_size );
       }
    }
 
