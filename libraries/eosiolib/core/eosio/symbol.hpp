@@ -200,6 +200,33 @@ namespace eosio {
          return a.value < b.value;
       }
 
+      /**
+       * Greater than operator. Returns true if a > b.
+       * @brief Greater than operator
+       * @return boolean - true if symbol_code `a` is greater than `b`
+       */
+      friend constexpr bool operator > ( const symbol_code& a, const symbol_code& b ) {
+         return a.value > b.value;
+      }
+
+      /**
+       * Comparison operator. Returns true if a <= b.
+       * @brief Comparison operator
+       * @return boolean - true if symbol_code `a` is less or equal `b`
+       */
+      friend constexpr bool operator <= ( const symbol_code& a, const symbol_code& b ) {
+         return a.value <= b.value;
+      }
+
+      /**
+       * Comparison operator. Returns true if a >= b.
+       * @brief Comparison operator
+       * @return boolean - true if symbol_code `a` is greater or equal `b`
+       */
+      friend constexpr bool operator >= ( const symbol_code& a, const symbol_code& b ) {
+         return a.value >= b.value;
+      }
+
    private:
       uint64_t value = 0;
    };
@@ -334,6 +361,33 @@ namespace eosio {
        */
       friend constexpr bool operator < ( const symbol& a, const symbol& b ) {
          return a.value < b.value;
+      }
+
+      /**
+       * Greater than operator. Returns true if a > b.
+       * @brief Greater than operator
+       * @return boolean - true if symbol `a` is greater than `b`
+       */
+      friend constexpr bool operator > ( const symbol& a, const symbol& b ) {
+         return a.value > b.value;
+      }
+
+      /**
+       * Comparison operator. Returns true if a <= b.
+       * @brief Comparison operator
+       * @return boolean - true if symbol `a` is less or equal `b`
+       */
+      friend constexpr bool operator <= ( const symbol& a, const symbol& b ) {
+         return a.value <= b.value;
+      }
+
+      /**
+       * Comparison operator. Returns true if a >= b.
+       * @brief Comparison operator
+       * @return boolean - true if symbol `a` is greater or equal `b`
+       */
+      friend constexpr bool operator >= ( const symbol& a, const symbol& b ) {
+         return a.value >= b.value;
       }
 
    private:

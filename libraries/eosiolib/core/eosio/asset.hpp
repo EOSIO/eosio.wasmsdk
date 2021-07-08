@@ -468,6 +468,11 @@ namespace eosio {
          return a.quantity < b.quantity;
       }
 
+      /// Greater than operator
+      friend bool operator>( const extended_asset& a, const extended_asset& b ) {
+         eosio::check( a.contract == b.contract, "type mismatch" );
+         return a.quantity > b.quantity;
+      }
 
       /// Comparison operator
       friend bool operator==( const extended_asset& a, const extended_asset& b ) {
