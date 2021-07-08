@@ -170,7 +170,7 @@ inline partial_key make_key(T&& t) {
    return partial_key(convert_to_key(std::forward<T>(t)));
 }
 inline partial_key make_key(partial_key&& t) {
-   return t;
+   return std::move(t);
 }
 inline partial_key make_key(partial_key& t) {
    return t;

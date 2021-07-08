@@ -365,10 +365,10 @@ void build_history_result(eosio::test_chain::get_history_result& history_result,
       history_result.block = std::move(*blocks_result.block);
    }
    if (!blocks_result.traces.empty()) {
-      blocks_result.traces.unpack(history_result.traces);
+      unpack(blocks_result.traces, history_result.traces);
    }
    if (blocks_result.deltas.empty()) {
-      blocks_result.deltas.unpack(history_result.deltas);
+      unpack(blocks_result.deltas, history_result.deltas);
    }
 }
 
