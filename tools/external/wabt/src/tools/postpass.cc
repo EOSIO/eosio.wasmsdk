@@ -68,6 +68,12 @@ static void ParseOptions(int argc, char** argv) {
         s_outfile = argument;
         ConvertBackslashToSlash(&s_outfile);
       });
+  parser.AddOption(
+      'n', "allow-names",
+      "Preserve the name section",
+      []() {
+         s_write_binary_options.write_debug_names = true;
+      });
   parser.AddArgument("filename", OptionParser::ArgumentCount::One,
                      [](const char* argument) {
                        s_infile = argument;
@@ -145,7 +151,7 @@ int ProgramMain(int argc, char** argv) {
     Module module;
     const bool kStopOnFirstError = true;
     ReadBinaryOptions options(s_features, s_log_stream_s.get(),
-                              stub, kStopOnFirstError,
+                              s_write_binary_options.write_debug_names, kStopOnFirstError,
                               stub);
     result = ReadBinaryIr(s_infile.c_str(), file_data.data(),
                           file_data.size(), &options, &error_handler, &module);

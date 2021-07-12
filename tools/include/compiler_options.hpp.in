@@ -584,7 +584,6 @@ static Options CreateOptions(bool add_defaults=true) {
    if (fquery_client_opt)
       ldopts.emplace_back("-fquery-client");
    if (allow_names_opt) {
-      ldopts.emplace_back("-fno-post-pass");
       ldopts.emplace_back("--allow-names");
    }
 #endif
