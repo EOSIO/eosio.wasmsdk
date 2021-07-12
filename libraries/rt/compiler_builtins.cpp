@@ -6,35 +6,31 @@ static constexpr uint32_t SHIFT_WIDTH = (sizeof(uint64_t)*8)-1;
 extern "C" {
 void eosio_assert(int32_t, const char*);
 void __ashlti3(__int128& ret, uint64_t low, uint64_t high, uint32_t shift) {
-   uint128_t i = high;
+   __int128 i = high;
    i <<= 64;
    i |= low;
-   i <<= shift;
-   ret = i;
+   ret = ___ashlti3(i, shift);
 }
 
 void __ashrti3(__int128& ret, uint64_t low, uint64_t high, uint32_t shift) {
-   // retain the signedness
-   ret = high;
-   ret <<= 64;
-   ret |= low;
-   ret >>= shift;
+   __int128 i = high;
+   i <<= 64;
+   i |= low;
+   ret = ___ashrti3(i, shift);
 }
 
 void __lshlti3(__int128& ret, uint64_t low, uint64_t high, uint32_t shift) {
-   uint128_t i = high;
+   __int128 i = high;
    i <<= 64;
    i |= low;
-   i <<= shift;
-   ret = (unsigned __int128)i;
+   ret = ___ashlti3(i, shift);
 }
 
 void __lshrti3(__int128& ret, uint64_t low, uint64_t high, uint32_t shift) {
-   uint128_t i = high;
+   __int128 i = high;
    i <<= 64;
    i |= low;
-   i >>= shift;
-   ret = (unsigned __int128)i;
+   ret = ___lshrti3(i, shift);
 }
 
 void __divti3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb) {
@@ -46,12 +42,8 @@ void __divti3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb)
 
    rhs <<= 64;
    rhs |=  lb;
-   //if ( rhs == 0 )
-   //   eosio_assert(false, "divide by zero");
 
-   lhs /= rhs;
-
-   ret = lhs;
+   ret = ___divti3(lhs, rhs);
 }
 
 void __udivti3(unsigned __int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb) {
@@ -63,11 +55,8 @@ void __udivti3(unsigned __int128& ret, uint64_t la, uint64_t ha, uint64_t lb, ui
 
    rhs <<= 64;
    rhs |=  lb;
-   //if ( rhs == 0 )
-   //   eosio_assert(false, "divide by zero");
 
-   lhs /= rhs;
-   ret = lhs;
+   ret = ___udivti3(lhs, rhs);
 }
 
 void __multi3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb) {
@@ -80,8 +69,7 @@ void __multi3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb)
    rhs <<= 64;
    rhs |=  lb;
 
-   lhs *= rhs;
-   ret = lhs;
+   ret = ___multi3(lhs, rhs);
 }
 
 void __modti3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb) {
@@ -93,11 +81,8 @@ void __modti3(__int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb)
 
    rhs <<= 64;
    rhs |=  lb;
-   //if ( rhs == 0 )
-   //   eosio_assert(false, "divide by zero");
 
-   lhs %= rhs;
-   ret = lhs;
+   ret = ___modti3(lhs, rhs);
 }
 
 void __umodti3(unsigned __int128& ret, uint64_t la, uint64_t ha, uint64_t lb, uint64_t hb) {
@@ -109,11 +94,8 @@ void __umodti3(unsigned __int128& ret, uint64_t la, uint64_t ha, uint64_t lb, ui
 
    rhs <<= 64;
    rhs |=  lb;
-   //if ( rhs == 0 )
-   //   eosio_assert(false, "divide by zero");
 
-   lhs %= rhs;
-   ret = lhs;
+   ret = ___umodti3(lhs, rhs);
 }
 
 // arithmetic long double

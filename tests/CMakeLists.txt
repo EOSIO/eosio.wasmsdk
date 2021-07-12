@@ -48,6 +48,9 @@ set_property(TEST version_tests PROPERTY LABELS unit_tests)
 add_test( NAME toolchain_tests COMMAND ${CMAKE_BINARY_DIR}/tools/toolchain-tester/toolchain-tester ${CMAKE_SOURCE_DIR}/tests/toolchain --cdt ${CMAKE_BINARY_DIR}/bin )
 set_property(TEST toolchain_tests PROPERTY LABELS toolchain_tests)
 
+add_test(NAME rt_tests COMMAND ${CMAKE_COMMAND} -P ${CMAKE_SOURCE_DIR}/libraries/rt/test/rt_tests.cmake WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/libraries/rt/test/)
+set_property(TEST rt_tests PROPERTY LABELS unit_tests)
+
 if (EOSIO_RUN_INTEGRATION_TESTS)
    find_package(eosio)
 
