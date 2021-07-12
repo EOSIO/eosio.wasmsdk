@@ -463,9 +463,6 @@ namespace eosio {
       constexpr action_wrapper()
          : code_name(DefaultContract), permissions() {}
 
-      constexpr action_wrapper( eosio::name user )
-         : code_name(DefaultContract), permissions({1,{user,"active"_n}}) {}
-
       action_wrapper( eosio::permission_level l )
          : code_name(DefaultContract), permissions({1,l}) {}
 
@@ -489,7 +486,9 @@ namespace eosio {
          : code_name(std::forward<Code>(code)), permissions({1, perm}) {}
 
       /*
-      template <typename Code>
+      // Commented out so that code using the ambiguous constructor that was removed will fail to compile.
+      // Reenable this when merging into develop.
+      template <typename Code, typename = std::enable_if_t<std::is_constructible_v<name, Code>>>
       constexpr action_wrapper(Code&& code)
          : code_name(std::forward<Code>(code)) {}
          */
